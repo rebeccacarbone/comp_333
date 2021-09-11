@@ -1,0 +1,61 @@
+1.)
+	Write facts corresponding to the idea that pizza, burgers, and burritos are served
+	warm. You should have three facts in total, one for each food.
+ANSWER:
+	% isWarm/1 procedure
+	isWarm(pizza).
+	isWarm(burgers).
+	isWarm(burritos).
+
+2.) 
+	Write a query to determine which foods are served warm.
+ANSWER:
+	?- isWarm(X).
+	
+3.) 
+	Write facts corresponding to the idea that Alice likes pizza, burgers, burritos, and
+	yogurt, and that Bob likes pizza, burgers, salad, and milk. You should have eight facts
+	in total. Note that uppercase letters denote variables, so you’ll need to use the atoms
+	alice and bob.
+ANSWER:
+	% likes/1 procedure
+	likes(alice, pizza).
+	likes(alice, burgers).
+	likes(alice, burritos).
+	likes(alice, yogurt).
+	likes(bob pizza).
+	likes(bob, burgers).
+	likes(bob, burritos).
+	likes(bob, yogurt).
+	
+4.) 
+	Write a query asking which foods Alice likes
+ANSWER:
+	?- likes(alice, Food)
+	
+5.) 
+	Write a query asking who likes pizza
+ANSWER:
+	?- likes(Person, pizza)
+	
+6.) Write a rule encapsulating the following idea: Bill likes any food that’s served warm.
+	The name of the rule should be the same as the fact name you used in the previous
+	problem.
+ANSWER:
+	likes(bill, Food) :-
+	isWarm(Food).
+	
+7.) Write a rule encapsulating the following idea: Janet likes any food that both Alice and
+	Bob like. The name of the rule should be the same as before.
+ANSWER:
+	likes(janet, Food) :-
+	likes(alice, Food),
+	likes(bob, Food).
+	
+8.) Write code (potentially both rules and facts) encapsulating the following idea: Mel
+	likes the foods that Janet likes, along with yogurt. Any rules and/or facts you define
+	should use the same name as before.
+ANSWER:
+	likes(mel, yogurt).
+	likes(mel, Food) :-
+	likes(janet, Food).

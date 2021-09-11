@@ -1,0 +1,66 @@
+---------------Logic Programming---------------
+
+- Logic as a model of computation
+-----------------------------------------------------------
+- Obsessed w/ "truth"
+
+Example: (in Swift (functional))
+let list1: List<String> = ...
+let list2: List<String> = ...
+let result = list1.append(list2)
+
+in Prolog:
+append(List1, List2, Result)
+	instead of everything being driven by input and output, the connection between input and output is more abstract
+-----------------------------------------------------------	
+- De-emphasis on input vs output
+- Relations instead of functions 
+	Relations = some relationship between data. more generic than functions (functions are a type of relation)
+-----------------------------------------------------------
+- = MEANS = (unification)***
+
+Example:
+
+X = X + 1 should not make sense in logic programming
+X = Y can work in either direction
+-----------------------------------------------------------
+- Multiple answers are possible(nondeterministic execution)***
+
+1 < X < 7
+X = 2;
+X = 3;
+...
+X = 6;
+all are correct but they cannot all be chosen
+
+Nondeterminism != Random
+- Nondeterminism means that multiple answers are possible, whereas random means anything is possible 
+-----------------------------------------------------------
+Uses: 
+- Automated Testing
+- Expert systems 
+
+
+***Two core features of Logic Programming 
+
+Prolog
+- name comes from (PROgramming in LOGic)
+- the most well known logic programming language and is the simplest
+
+-----------------------------------------------------------
+Prolog code:
+% this is a comment in Prolog
+
+% arity: the number of parameters to a procedure
+% isInteger/1 procedure
+isInteger(0). % fact
+isInteger(1). % fact
+isInteger(2). % fact
+
+% isInteger/2 procedure
+isInteger(0, 1).
+isInteger(1, 2).
+
+-----------------------------------------------------------
+Closed-world assumption:
+	All the facts and rules that you provide describe all truth. Anything not in those facts is false.

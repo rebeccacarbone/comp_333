@@ -1,0 +1,83 @@
+-----------------Intro Prolog-----------------
+
+1.	isWarm(pizza).
+	isWarm(burgers).
+	isWarm(burritos).
+	
+2.	?- isWarm(X).
+
+3.	likes(alice, pizza). etc
+	likes(bob, pizza). etc
+	
+4.	?- likes(alice, Food).
+
+5.	?- likes(Person, pizza).
+
+6.	likes(bob, Food) :-
+	isWarm(Food).
+	
+7.	likes(janet, Food) :-
+	likes(bob, Food),
+	likes(alice, Food).
+	
+8. 	likes(mel, yogurt).
+	likes(mel, Food) :-
+	likes(janet, Food).
+	
+-----------------Recursion-----------------
+
+1.	factorial(0, 1).
+	factorial(N, Result) :-
+	N > 0,
+	Temp is N-1,
+	factorial(Temp, Sum),
+	Result is N * Sum.
+	
+2.	myBetween(Low, High, Low) :-
+	Low =< High
+	myBetween(Low, High, X) :-
+	High > Low,
+	NewLow is Low + 1,
+	myBetween(NewLow, High, NewX).
+	
+-----------------Unification-----------------
+
+1.	true
+
+2.	false
+
+3.	true; X = 27
+
+4.	true; X = 1
+
+5.	true; X = foo
+
+6.	false
+
+7.	false
+
+8.	true
+
+9.	false
+
+10.	true; X = 1
+
+11.	true; X = 1
+
+12.	false
+
+13.	false
+
+14.	true; X = 1; Y = 2
+
+15.	true; X = 1; Y = 2
+
+16.	false
+
+17.	true; Z = bar(X); Y = bar
+
+18.	false
+
+19.	true; X = 3; Y = 2
+
+20. false

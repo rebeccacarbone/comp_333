@@ -1,0 +1,80 @@
+1.) 
+	Define a function that takes a value of some generic type A, and returns the same
+	value.
+ANSWER:
+
+
+2.) 
+	Define a function that takes values of generic types A and B, and returns a pair of
+	these values.
+ANSWER:
+	func myFunc<A, B>(_ a: A, _ b: B) -> (<A>,<B>) { ... }
+	
+	
+3.) 
+	Write the body of the following Swift function. As a hint, only one possible body
+	(which typechecks) exists.
+	func myFunc<A, B, C, D>(a: A, b: B,
+	f1: (A) -> C,
+	f2: (A, C) -> D) -> (C, D) { 
+ANSWER:
+	let c = f1(a)
+	let d = f2(a, c)
+	return (c, d)
+	
+4.) 
+	Consider the following enum definition, defining the structure of a linked list:
+	indirect enum List<A> {
+	case cons(A, List<A>)
+	case empty
+	}
+a.) 
+	Define the map function, which has the following signature:
+	func map<A, B>(list: List<A>, f: (A) -> B) -> List<B> { 
+ANSWER:
+	switch list {
+		case .empty:
+			return .empty
+		case .cons(let head, let tail):
+			//head: A
+			//tail: List<A>
+			let b = f(head)
+			let restBs = map(list: tail, f: f)
+			return .cons(b, restBs)
+			//another option:
+			//let restBs: List<B> = map(list: tail, f: f)
+			//return restBs 
+	}
+	}
+b.) 
+	Define the foldLeft function, which has the following signature:
+	func foldLeft<A, B>(list: List<A>,
+	accum: B,
+	f: (B, A) -> B) -> B {
+ANSWER:
+	switch list {
+		case .empty: 
+			return accum
+		case .cons(let head, let tail):
+			//let b = f(accum, head)
+			//return .cons(b, foldLeft(tail, accum))
+			let new_accum = f(accum, head)
+			return foldLeft(list: tail, accum: new_accum, f: f)
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

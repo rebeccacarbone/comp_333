@@ -1,0 +1,28 @@
+1.	Allows for same method call to have different behaviors at runtime. Allows for abstract code behavior; 
+	code only needs the method name and the behavior can be dynamically changed at runtime. 
+2.	Code can become cluttered with many classes and definitions. Code can become less easy to follow because the
+	behavior is not explicit. Generally worse performance
+	
+3.	c1
+	c2
+	
+Subtyping example:
+	String is a subtype of Object so Object foo = "foo"; is an example of subtyping
+	
+8. Static typing guarantees that the types given are what is expected, so behavior at runtime is more predictable.
+	Also: eliminate errors, help structure code, compilers can optimize code with type information
+	
+9. More flexibility; less code to write (type values); can represent code that can't be represented statically
+
+10.	Type errors will be caught before the program runs, so there can't be undefined behavior; emphasize correctness
+
+11. Performance benefit; more expressive
+
+12. 5
+	7
+	3
+	5
+	
+13.	ERROR
+	42
+	

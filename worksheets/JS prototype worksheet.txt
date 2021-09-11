@@ -1,0 +1,64 @@
+***********Question 1***********
+1.) Consider the JavaScript code below:
+function Base() {}
+function Sub1() {}
+function Sub2() {}
+// <<some additional code>>
+let base = new Base();
+let sub1 = new Sub1();
+let sub2 = new Sub2();
+base.method(); // prints "base"
+sub1.method(); // prints "sub1"
+sub2.method(); // prints "base"
+console.log(base instanceof Base); // prints "true"
+console.log(sub1 instanceof Base); // prints "true"
+console.log(sub2 instanceof Base); // prints "true"
+Code is elided where <<some additional code>> is. Write what this elided code
+must be below.
+
+***********My Answer***********
+Base.prototype.method = function (x) { console.log(x); }
+Sub1.prototype = Base;
+Sub2.prototype = Base;
+
+***********Correct Answer***********
+Base.prototype.mthod = function method() { 
+		console.log("base"); 
+}
+Sub1.prototype = new Base(); 
+//sub1's prototype is an empty base object and that objects prototype is Base.prototype
+Sub1.prototype.method = function method() { 
+		console.log("sub1"); 
+}
+Sub2.prototype = new Base();
+//this will reuse the function method() from Base
+
+***********End Question 1***********
+
+
+***********Question 2***********
+2.) Consider the JavaScript code below. What is the output of this code?
+function AddThis(x) { this.x = x; }
+AddThis.prototype.add = function (y) { return this.x + y; }
+let withOne = new AddThis(1);
+let withFive = new AddThis(5);
+console.log(withOne.add(1));
+console.log(withOne.add(2));
+
+***********My Answer***********
+Output:
+2
+7
+
+***********Correct Answer***********
+2
+3
+//read it too fast and didnt realize its adding to withOne both times
+***********End Question 2***********
+
+***********Question 3***********
+3.) Write JavaScript code which will effectively add a sub method to all instances of
+AddThis, where sub should subtract this.x from its parameter and return the result.
+As a hint, you'll need to add it to AddThis' prototype.
+
+AddThis.prototype.sub = function (y) { return y - this.x; }

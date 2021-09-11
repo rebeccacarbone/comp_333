@@ -1,0 +1,122 @@
+-----------------Functions and Higher-Order Functions-----------------
+
+1.	a.) func add(a: Int, b: Int) -> Int {
+			return a + b
+		}
+		
+	b.) add(a: 2, b: 3)
+	
+2.	a.) func sub(_ first: Int, _ second: Int) -> Int {
+			return first - second
+		}
+	b.) sub(4, 5)
+	
+**3.a.)	func callsFunc(f: (Int) -> Int; i: Int) -> Int {
+			return f(i)
+		}
+	b.) callsFunc(f: {x in x + 1}, i: 5)
+	
+**4. func indirectIf(_ b: Bool, ifTrue: () -> Int, ifFalse: () -> Int) -> Int {
+		if(b) {
+			return ifTrue()
+		}
+		else {
+			return ifFalse()
+		}
+	 }
+	 
+-----------------Algebraic Datatypes and Pattern Matching-----------------
+
+1.	enum MyBool {
+		case True
+		case False
+	}
+	
+2. enum MyList {
+		case cons(Int, MyList)
+		case empty
+	}
+	
+3. let list: MyList.cons(1, MyList.cons(2, MyList.cons(3, MyList.empty)))
+
+**4. switch (list) {
+		case .Cons(2, _):
+			return 0
+		case .Cons(3, .cons(4, _)):
+			return 1
+		case .cons(let head, _):
+			return head
+		case .empty
+			return -1
+	}
+	
+5. func length(list: MyList) -> Int {
+		switch(list) {
+			case .cons(_, let tail):
+				return 1 + length(list: tail)
+			case .empty
+				return 0
+		}
+	}
+	
+-----------------Generics, Polymorphism, Higher Order Functions-----------------
+
+1.	func example<A>(_ a: A) -> A { return a }
+
+2.	func example<A, B>(_ a: A, _ b: B) -> (A, B) { return (a, b) }
+
+3.	let c = f1(a)
+	let d = f2(a, c)
+	return (c, d)
+	
+4.	a.) 
+		switch list {
+			case .cons(let head, let tail):
+				return List.cons(f(head), map(list: tail, f: f))
+			case .empty:
+				return List.empty
+		}
+		
+	b.) switch list {
+			case .cons(let head, let tail):
+				return foldLeft(list: tail, accum: f(accum, head), f: f)
+			case .empty
+				return accum
+		}
+		
+-----------------Extensions and Protocols-----------------
+
+1.	extension Int {
+		func add(_ x: Int) -> (Int) { return self + x }
+	}
+	
+2.	protocol Equality {
+		func equals(_a: Self) -> Bool
+	}
+
+3. 	extension Int: Equality {
+		func equals(_ a: Int) -> Bool { return Self == a }
+	}
+	
+4. 	extension List where A == Int {
+		func evens() -> List<Int> {
+			switch list {
+				case .cons(let head, let tail):
+					let rest = tail.evens()
+					if(head % 2 == 0) {
+						return List.cons(head, rest)
+					} else {
+						rest
+					}
+				case .empty:
+					return List.empty
+			}
+		}
+	}
+	
+	
+-----------------Review Again-----------------
+1. 3, 4 # 1
+2. 4 #2
+3. all of #3
+4. all of #4

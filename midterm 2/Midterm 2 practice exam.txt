@@ -1,0 +1,417 @@
+ASK ABOUT 12, 13, 17
+1.) Write the output of the following JavaScript code:
+	function foo(fooParam) {
+		return function (innerParam) {
+			return fooParam - innerParam;
+		}
+	}
+	
+	let f1 = foo(7);
+	let f2 = foo(10);
+	console.log(f1(2));
+	console.log(f2(3));
+	console.log(f1(4));
+	console.log(f2(5)); 
+ANSWER:
+	5
+	7
+	3
+	5
+Verdict: CORRECT
+
+
+***2.) Consider the following JavaScript code:
+	function base() {
+		return function (f) {};
+	}
+	
+	function rec(n) {
+		return function (f) {
+			f();
+			n(f);
+		}
+	}
+	
+	function empty() { console.log("empty");}
+	
+	let f1 = rec(rec(base));
+	let f2 = rec(rec(rec(base)));
+	f1(empty);
+	f2(empty);	
+How many times is empty called in total in the above code?
+ANSWER:
+	5
+Verdict: Correct but ask
+
+
+3.) Consider the following JavaScript code with corresponding output, which calls an unseen
+	function called mystery:
+	function output() {
+		console.log("foo");
+	}
+	
+	let f1 = mystery(output);
+	f1();
+	console.log();
+	let f2 = mystery(f1);
+	f2();
+	console.log();
+	let f3 = mystery(f2);
+	f3();
+	console.log();
+	
+	Output:
+	foo	
+	foo
+	
+	foo
+	foo
+	foo
+	foo
+	
+	foo
+	foo
+	foo
+	foo
+	foo
+	foo
+	foo
+	foo
+Define the mystery function below.
+ANSWER:
+	function mystery(f) {
+		return function () {
+			f();
+			f();
+		};
+	}
+Verdict: CORRECT
+
+
+4.) Write the output of the following JavaScript code:
+	function cap(min, max, wrapped) {
+		return function (param) {
+			let temp = wrapped(param);
+			if (temp < min) {
+				return min;
+			} else if (temp > max) {
+				return max;
+			} else {
+				return temp;
+			}
+		};
+	}
+	
+	function addTen(param) {
+		return param + 10;
+	}
+	
+	function subTen(param) {
+		return param - 10;
+	
+	
+	let f1 = cap(0, 10, addTen);
+	let f2 = cap(0, 100, addTen);
+	let f3 = cap(0, 10, subTen);
+	let f4 = cap(0, 100, subTen);
+	
+	console.log(f1(0)); //0 + 10 = 10, 10 !> 10 so return temp (10)
+	console.log(f1(5)); //5 + 10 = 15, 15 > 10 so return max (10)
+	console.log();
+	console.log(f2(0)); //0 + 10 = 10, 10 !> 100 so return temp (10)
+	console.log(f2(5)); //5 + 10 = 15, 15 !> 100 so return temp (15)
+	console.log();
+	console.log(f3(0)); //0 - 10 = -10, -10 < 0 so return min (0)
+	console.log(f3(5)); //5-10 = -15, -15 < 0 so return min (0)
+	console.log();
+	console.log(f4(0));	//0 - 10 = -10, -10 < 0 so return min (0)
+	console.log(f4(5)); //5 - 10 = -15, -15 < 0 so return min (0)
+	console.log(); 
+ANSWER:
+	10
+	10
+	
+	10
+	15
+	
+	0
+	0
+	
+	0
+	0
+Verdict: CORRECT
+
+
+******5.) Consider the following JavaScript code and output:
+	console.log(
+		ifNotNull(1 + 1,
+		a => ifNotNull(2 + 2,
+		b => a + b)));
+	console.log(ifNotNull(7, 
+			function (e) {
+				console.log(e);
+				return ifNotNull(null,
+					function (f) {
+						console.log(f);
+						return 8;
+					})
+			});
+
+	Output:
+	6
+	7
+	null
+
+	ifNotNull takes two parameters:
+	1. Some arbitrary value, which might be null
+	2. A function. This function is called with the arbitrary value if the value is not null, and the
+	result of the function is returned. If the value is null, this function isn't called, and null is
+	returned instead.
+Define the ifNotNull function below, so that the output above is produced. 
+ANSWER:
+	function ifNotNull(value, func) {
+		return (value !== null) {
+			return f(value);
+		} else {
+			return value;
+		}
+	}
+Verdict: Correct but ask
+	
+
+********6.) Consider the following array definition in JavaScript:
+	let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+a) Use filter to get an array of all even elements in arr.
+ANSWER:
+	arr.filter(a => a % 2 == 0);
+	
+b) Use map to get an array of strings, where each string represents a number in arr. As a
+hint, you can call the toString() method on a number (e.g., 5.toString()) in JavaScript
+to get its string representation.
+ANSWER:
+	arr.map(a => a.toString());
+	
+c) Use reduce to get the last element in arr.
+ANSWER:
+	arr.reduce((accum, element) => element)
+d) Use a combination of filter and reduce to get the sum of all elements in arr which are
+greater than 5.
+ANSWER:
+	arr.filter(e => e > 5).reduce((accum, element) => accum + element, 0);
+VERDICT: Ask about c and d
+
+
+7.a.) Define a constructor for Dog objects, where each Dog object has a name. An example
+	code snippet is below, illustrating usage:
+	let d = new Dog("Rover"); // line 1
+	console.log(d.name); // line 2; prints Rover 
+ANSWER:
+	function Dog(param) {
+		this.name = param;
+	}
+
+b.) Define a different constructor for Dog, which puts a bark method directly on the Dog
+	objects. The bark method should print "Woof!" when called. Example usage is below:
+	let d = new Dog("Sparky");
+	d.bark(); // prints Woof! 
+	function Dog(param) {
+		this.name = param;
+		this.bark = function() { console.log("Woof!"); }
+	}
+	
+c.) Define a method named growl for Dog objects, which prints "[dog name] growls" when
+	called. Use Dog's prototype, instead of putting the method directly on Dog objects
+	themselves. Example usage is below:
+	let d = new Dog("Rocky");
+	d.growl(); // prints Rocky growls
+ANSWER:	
+	Dog.prototype.growl = function growl() { console.log(this.name + " growls"); }
+Verdict: CORRECT
+
+	
+8.) Consider the JavaScript code below:
+	function Animal(name) { this.name = name; }
+	Animal.prototype.getName = function() { return this.name; }
+	function Bird(name) { Animal.call(this, name); }
+	Bird.prototype = Object.create(Animal.prototype);
+	Bird.prototype.fly = function() {
+		console.log(this.getName() + " flies");
+	}
+	function Mouse(name) {
+		this.name = name;
+		this.squeak = function() {
+		console.log(this.name + " squeaks");
+		}
+	}
+	Mouse.prototype = Object.create(Animal.prototype);
+	Mouse.prototype.fly = Bird.prototype.fly;
+	let b1 = new Bird("Coco"); let b2 = new Bird("Sunny");
+	let m1 = new Mouse("Pip"); let m2 = new Mouse("Ruby");
+	Write a memory diagram which shows how memory looks after this program executes. Your
+	diagram should include the objects and fields associated with b1, b2, m1, m2,
+	Mouse.prototype, and Bird.prototype, Animal.prototype. As a hint, the
+	__proto__ field on objects refers to the corresponding object's prototype.
+ANSWER:
+	Notes: .call(obj to refer to, variable) (ex: Animal.call(this, name)), know what Object.create() does
+
+9.) Consider the test suite below, using assertEquals from the second assignment:
+	function test1() {
+		let t1 = new Obj("foo");(
+		assertEquals("foo", t1.field);
+	}
+	function test2() {
+		let t2 = new Obj("bar");
+		assertEquals("barbar", t2.doubleField());
+	}
+	function test3() {
+		let t3 = new Obj("baz");
+		// hasOwnProperty returns true if the object itself has the field,
+		// otherwise it returns false. If the field is on the object's
+		// prototype instead (__proto__), it returns false.
+		assertEquals(false, t3.hasOwnProperty("doubleField"));
+	}
+	Write JavaScript code which will make the above tests pass.
+ANSWER:
+	function Obj(param) {
+		this.field = param;
+	}
+	
+	Obj.prototype.doubleField = function() { return this.field + this.field; }
+Verdict: CORRECT
+
+****10.) Consider the following enum definition:
+	enum SomeEnum {
+		case foo(Int)
+		case bar(Int, Int)
+		case baz(Int, Int, Int)
+	}
+	Write a function named test which takes a value of type SomeEnum. The function should do
+	the following:
+	• If given a foo, it should return the value in the foo
+	• If given a bar, it should return the sum of the two values in the bar
+	• If given a baz, it should return the sum of the first and last values in the baz. You should
+	not introduce a variable for the second (middle) value in the baz.
+	An example call to the function follows: test(SomeEnum.baz(1, 2, 3))
+ANSWER:
+	func test(s: SomeEnum) -> Int {
+		switch s {
+			case .foo(let x):
+				return x
+			case .bar(let x, let y):
+				return x + y
+			case .baz(let x, _, let y):
+				return x + y 
+		}
+	}
+Verdict: Correct now
+
+
+11.) Write the body of the following function, or say if it's impossible to implement. If it's
+	impossible to implement, explain why.
+	func combine<A, B>(a: A, b: B) -> (A, B) {
+	}
+ANSWER:
+	let tuple1: (A, B) = (a, b)
+	return tuple1
+	OR
+	return (a, b)
+Verdict: CORRECT 
+
+
+******12.) Write the body of the following function, or say if it's impossible to implement. If it's
+	impossible to implement, explain why.
+	func combine2<A, B>(a: A) -> ((B) -> (A, B)) {
+	} 
+ANSWER:
+	return {(b) -> (a, b) }
+Verdict: ASK
+
+
+*****13.) Write the body of the following function, or say if it's impossible to implement. If it's
+	impossible to implement, explain why.
+	func combine3<A, B>(tup: (A, B)) -> A {
+	}
+ANSWER:
+	let (a, _) = tup
+	return a
+Verdict: ASK
+
+14.) Write the body of the following function, or say if it's impossible to implement. If it's
+	impossible to implement, explain why.
+	func combine4<A, B>(a: A, f: (A) -> B) -> (A, B) {
+	}	 
+ANSWER:
+	let b = f(a)
+	return (a, b)
+Verdict: CORRECT
+
+
+15.) Consider the following enum definition:
+	enum Something<A, B, C> {
+		case alpha(A)
+		case beta(B)
+		case gamma(C)
+	}
+a.) Write the body of the following function, or say if it's impossible to implement. If it's
+	impossible to implement, explain why.
+	func combine5<A, B, C>(s: Something<A, B, C>) -> (A, B, C) {
+	}
+ANSWER:
+	It is not possible to implement. s will be either A, B, or C. We will not have all 3 values in order to return a tuple. 
+
+15.b.) Write the body of the following function, or say if it's impossible to implement. If it's
+	impossible to implement, explain why.
+	func combine6<A>(s: Something<A, A, A>) -> A {
+	}
+ANSWER: 
+	switch s {
+		case .alpha(let a)
+			return a 
+		case .beta(let a)
+			return a 
+		case .gamma(let a)
+			return a 
+		}
+		
+Verdict: Watch lecture about it
+
+
+16.) Write the body of the following function, or say if it's impossible to implement. If it's
+	impossible to implement, explain why.
+	func combine7<A, B>(f: (A) -> B, b: B) -> A {
+	}
+ANSWER: 
+	Impossible to implement. We are given a B but need an A to implement f and to return.
+	
+
+17.) Consider the following enum definition representing lists:
+	indirect enum List<A> {
+		case cons(A, List<A>)
+		case empty
+	}
+a.) Write a function named partition which takes a predicate and divides a generic list
+	into a pair of returned generic lists. The first element of the pair holds all elements for which
+	the predicate returned true, and the second element of the pair holds all elements for which
+	the predicate returned false. An example call is below:
+	let (matching, nonmatching) =
+	partition(list: List.cons(1, List.cons(2, List.empty)),
+	pred: { e in e > 1 })
+	// matching: List.cons(2, List.empty)
+	// nonmatching: List.cons(1, List.empty) 
+ANSWER:
+	func partition(list: List<A>, pred: (A) -> Bool) -> (List<A>, List<A>) {
+		switch list {
+			case .empty:
+				return (List<A>, List<A>)
+			case .cons(let head, let tail):
+			let (matching, nonmatching) = partition(head, pred)
+			if (pred(head)))
+				matching = head
+			else
+				nonmatching = head
+		}
+	}
+	
+Verdict: Ask
+	

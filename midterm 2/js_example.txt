@@ -1,0 +1,37 @@
+function Something(inputFirst, inputSecond) {
+   this.first = inputFirst;
+   this.second = inputSecond;
+
+   function addWidth(amount) {
+     return this.first + this.second + amount;
+   }
+
+   function reverse() {
+     return new Something(this.second, this.first);
+   }
+
+}
+
+function runTest(test) {
+    process.stdout.write(test.name + ": ");
+    try {
+        test();
+        process.stdout.write("pass\n");
+    } catch (error) {
+        process.stdout.write("FAIL\n");
+        console.log(error);
+    }
+} // runTest
+
+function assertEquals(expected, received) {
+    if (expected !== received) {
+        throw ("\tExpected: " + expected.toString() + "\n" +
+               "\tReceived: " + received.toString());
+    }
+} // assertEquals
+
+function test1() {
+    let obj = new Something("foo", "bar");
+    assertEquals("foo", obj.first);
+    assertEquals("bar", obj.second);
+}

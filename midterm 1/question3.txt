@@ -1,0 +1,58 @@
+Consider the following code implementing an immutable linked list (from assignment #1):
+
+public interface ImmutableList {
+    public int numEvens();
+}
+
+public class Cons implements ImmutableList {
+    public final int head;
+    public final ImmutableList tail;
+    public Cons(final int head, final ImmutableList tail) {
+        this.head = head;
+        this.tail = tail;
+    }
+    public int valueCount(int value) { ... }
+}
+
+public class Nil implements ImmutableList {
+    public Nil() {}
+    public int valueCount(int value) { ... }
+}
+The valueCount method should return the number of times value appears in the list. Some examples are below:
+
+new Nil().valueCount(3); // returns 0
+
+new Cons(1, new Nil()).valueCount(3); // returns 0
+
+new Cons(2, new Nil()).valueCount(2); // returns 1
+
+new Cons(1, new Cons(1, new Cons(3, new Nil()))).valueCount(1) // returns 2
+
+new Cons(1, new Cons(2, new Cons(3, new Nil()))).valueCount(2) // returns 1
+
+new Cons(1, new Cons(2, new Cons(3, new Nil()))).valueCount(4) // returns 0
+Write the implementation of valueCount below. Unlike assignment #1, you may use whatever you want, including if and loops. 
+As a hint, your recursive case should be in Cons, and your base case should be in Nil. Additionally, while if will probably be useful, loops shouldn't be necessary.
+
+/////////////////////ANSWER/////////////////////////////////
+public class Cons implements ImmutableList {
+
+public int valueCount(int value) {
+if(head == value) {
+return 1 + tail.valueCount(value);
+}
+else {
+return 0 + tail.valueCount(value);
+}
+}
+
+}
+
+public class Nil implements ImmutableList {
+
+public int valueCount(int value) {
+return 0;
+}
+
+}
+

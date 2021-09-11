@@ -1,0 +1,14 @@
+1.)
+	Write a recursive procedure named factorial which computes this function. The first
+	parameter to factorial should be n, and the second parameter should be the result.
+	For example, the following queries should succeed:
+	?- factorial(0, 1).
+	?- factorial(3, 6). 
+ANSWER:
+	factorial(0, 1).
+	factorial(N, Result) :-
+		N > 0,
+		Temp is N - 1,
+		factorial(Temp, Next),
+		Result is N * Next.
+		

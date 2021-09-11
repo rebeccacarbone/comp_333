@@ -1,0 +1,89 @@
+1.
+public interface Concatter {
+	String s;
+	public String concat(String add);
+}
+
+public class LeftRight implements Concatter {
+	
+	String s;
+	
+	public LeftRight(String x) {
+		s = x;
+	}
+	
+	public String concat(String add) {
+		return s + add;
+	}
+}
+
+public class RightLeft implements Concatter {
+
+	String s;
+	
+	public RightLeft(String x) {
+		s = x;
+	}
+	
+	public String concat(String add) {
+		return add + s;
+	}
+}
+
+
+2.
+
+public interface NewCounter {
+	public int toInt();
+	public NewCounter increment();
+}
+
+public class ZeroZero implements NewCounter {
+	public int toInt() {
+	return 0;
+	}
+	
+	public NewCounter increment() {
+		return new ZeroOne();
+	}
+}
+etc.
+
+
+3.
+public class Cons implements ImmutableList {
+
+	public int valueCount(int value) {
+		if(head == value)
+			return 1 + tail.valueCount(value);
+		else
+			return tail.valueCount(value);
+	}
+}
+public class Nil implements ImmutableList {
+	
+	public int valueCount(int value) {
+		return 0;
+	}
+}
+
+
+4.
+a.) Strongly typed languages check for type consistency, so the program would compile. However, at runtime an exception would be thrown related to the array index out of bounds.
+b.) The program would compile and would run without throwing an exception. However, the behavior of the program will be unpredictable and cannot be guaranteed. 
+c.) No. Java and C++ are both examples of strongly typed languages, but Java is statically typed and C++ is dynamically typed. They will both behave similarly in this case.
+
+
+5.
+a.) The compiler will catch that the method does not exist and the program will be rejected before it can run.
+b.) The program would compile but would not successfully run. When the type is checked at runtime, the missing method will cause the program to crash.
+
+
+6.
+function wrap(func) {
+	return function(x, y) {
+	let temp = func(x, y);
+	console.log(temp);
+	return temp;
+	}
+}

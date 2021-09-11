@@ -1,0 +1,122 @@
+Consider the OriginalCounter class below:
+
+public class OriginalCounter {
+    public final boolean bit1;
+    public final boolean bit0;
+
+    public OriginalCounter(final boolean bit1, final boolean bit0) {
+        this.bit1 = bit1;
+        this.bit0 = bit0;
+    }
+
+    public OriginalCounter increment() {
+        if (!bit1 && !bit0) { // 00
+            return new OriginalCounter(false, true); // 01
+        } else if (!bit1 && bit0) { // 01
+            return new OriginalCounter(true, false); // 10
+        } else if (bit1 && !bit0) { // 10
+            return new OriginalCounter(true, true); // 11
+        } else {
+            // should be 11
+            return new OriginalCounter(false, false); // 00
+        }
+    }
+
+    public int toInt() {
+        if (!bit1 && !bit0) { // 00
+            return 0;
+        } else if (!bit1 && bit0) { // 01
+            return 1;
+        } else if (bit1 && !bit0) { // 10
+            return 2;
+        } else {
+            // should be 11
+            return 3;
+        }
+    }
+
+    public static void main(String[] args) {
+        OriginalCounter counter = new OriginalCounter(false, false);
+        while (true) {
+            System.out.println(counter.toInt());
+            counter = counter.increment();
+        }
+    }
+}
+OriginalCounter represents two bits, and can increment them. The main method prints 0, 1, 2, 3, 0, 1, 2, 3, and so on, for infinity.
+
+This code can be refactored to use virtual dispatch. Rather than use two boolean values, we can instead represent each possible pair of values as a distinct class. 
+A modified main is shown below, which uses this style, changing OriginalCounter to NewCounter:
+
+public static void main(String[] args) {
+    NewCounter counter = new ZeroZero();
+    while (true) {
+        System.out.println(counter.toInt());
+        counter = counter.increment();
+    }
+}
+The above main produces the same output as below. Implement the ZeroZero class, along with any additional classes needed to make this output be the same, below.
+
+
+/////////////////////////Answer//////////////////////////////
+public interface NewCounter {
+public int toInt();
+public NewCounter increment();
+}
+
+
+
+
+public class ZeroZero implements NewCounter {
+
+public int toInt() {
+return 0;
+}
+
+public NewCounter increment() {
+return new ZeroOne();
+}
+}
+
+
+
+
+public class ZeroOne implements NewCounter {
+
+public int toInt() {
+return 1;
+}
+
+public NewCounter increment() {
+return new OneZero();
+}
+}
+
+
+
+
+public class OneZero implements NewCounter {
+
+public int toInt() {
+return 2;
+}
+
+public NewCounter increment() {
+return new OneOne();
+}
+}
+
+
+
+
+public class OneOne implements NewCounter {
+
+public int toInt() {
+return 3;
+}
+
+public NewCounter increment() {
+return new ZeroZero();
+}
+}
+

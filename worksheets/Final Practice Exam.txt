@@ -1,0 +1,87 @@
+1.) 
+	a.) Garbage collection is a way of automating memory management so that the programmer does not have to allocate and deallocate memory. 
+		When an object is no longer referenced in a program, the garbage collector frees the memory associated with it. 
+	b.) Reference counting refers to a technique in the number of references to each object is counted. This is not used strictly for garbage collection, but
+		when used for garbage collection an object is dereferenced as soon as the count reaches zero. The count is increased when a reference to the object is made
+		and decremented when the object is dereferenced.
+	c.) Reference counting frees objects as soon as they are no longer needed, rather than in cycles such as in garbage collection.
+	d.) Garbage collection is more efficient because reference counting requires constant updates. 
+	
+2.)
+	A compiler takes an input program in one language and produces an executable output program in a second (lower-level) language. A compiler translates
+	the entire program and rejects it if errors are found. An interpreter translates an input program line-by-line into executable code at runtime and does not 
+	check for errors before running.
+
+**3. 
+	a.) In JIT compilation, the interpreter scans and identifies commonly used code. This code can be translated into machine code. As the interpreter executes a program line-by-line, this code can then be
+		referenced. 
+	b.) JIT compilers are dynamic and can access runtime information that traditional compilers cannot. This allows a JIT compiler to make decisions about the code that may result in a more dynamic, quicker
+		execution of a program.
+
+4.	Type inference refers to a language's ability to use context to assign type to a variable or object in which the type is not specified. This occurs in statically typed languages where the type of a variable/object
+	must be explicitly known. In dynamically typed languages, the type does not need to be specified, so type inference does not occur. However, the result of type inference may be code that appears dynamically typed.
+	
+5.	a.) A higher order function is a function that takes a function as a parameter and/or returns a function. Higher order functions are created dynamically at runtime, and can be stored in variables.
+	**b.) ??
+	c.) function doSomething(b) {
+			return function checkEquals(a) {
+				return b == a;
+			}
+		}
+		
+6.	a.) Yes, it likely does have type inference. In the function declaration, x and y do not have assigned types. The two function calls use different types as well, suggesting that
+		the type is not strictly defined and the program will work as long as both parameters are the same type.
+	**b.) It seems unlikely. Although the type is not specified for x and y, it appears that the type is expected to be numerical because the code performs division on x and y and the second function call uses Strings.
+	c.) The program would compile because the type would not be checked until runtime, so any type errors would not be discovered until the code executes. 
+	
+**7.
+	a.) 
+		protocol Equals() {
+			func equals(_ x: Self) -> Bool
+		}
+	b.) extension Int: Equals {
+			func equals(_ x: Self) -> Bool { return x == self }
+		}
+	c.) extension Thing: Equals where A: Equals {
+			func equals(_ x: Self) -> Bool {
+				switch(self, other) {
+					case (.thing1, .thing1):
+						return true
+					case let (.thing2(left), .thing2(right)):
+						return left.equals(right)
+					case _:
+						return false
+				}
+			}
+		}
+		
+8.	The extension of the Foo protocol was written for type Int, but the line true.fooMethod() is attempting to use the method on a type Bool. As far as we can tell from this code, the extension is not speciifed for Bool.
+
+9.	isFish(goldfish).
+	isFish(bass).
+	isFish(carp).
+	
+10.	musicalFish(X) :-
+	isFish(X),
+	isInstrument(X).
+	
+11. X = 0;
+	X = 1;
+	X = 3.
+	
+12.	a.) Without N > 1, when N <= 1 the recursive case will still be attempted because it lacks mutual exclusion with the base cases. This could result in infinite recursion.
+	b.) Math can only be computed in Prolog with the is operator. The more concise version does not use is and instead attempts to directly do the math in the recursive call, this will result in N-1 being parsed as a structure
+		made up of (N, 1).
+		
+		
+		
+		
+		
+		
+		
+		
+		
+REVIEW:
+Swift (all of it)
+JS syntax
+Prolog is mostly ok

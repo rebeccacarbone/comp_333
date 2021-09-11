@@ -1,0 +1,56 @@
+1.) 
+	Define an enum named MyBool which represents truth and falsehood.
+ANSWER:
+	enum MyBool {
+		case yes
+		case no
+	}
+	
+	
+2.)
+	Define an enum named MyList which encodes a singly-linked list of integers, using
+	the same cons/nil structure that we used in assignment 1.
+ANSWER:
+	indirect enum MyList {
+		case Nils
+		case Cons(Int, MyList)
+	}
+	
+	
+3.)
+	Using the prior enum definition, create a list containg 1, 2, and 3, in that order.
+ANSWER:
+	let List: MyList = MyList.Cons(1, MyList.Cons(2, My List.Cons(3, MyList.Nils)))
+	
+4.)
+	Write a switch which will pattern match on a variable named list, and do one of
+	the following:
+		• If the list starts with a 2, return 0
+		• If the list starts with a 3, followed by a 4, return 1
+		• For any other non-empty list, return the value of the first element
+		• If the list is empty, return -1
+ANSWER:
+	switch list {
+		case .Cons(3, .Cons(4, _)):
+			return 1:
+		case .Cons(2, _):
+			return 0
+		case  .Cons(let head, _):
+			return head;
+		case .Nils:
+			return -1
+		}
+		
+5.) 
+	Write a function named length which takes a list as a parameter, and recursively
+	computes the length of the given list.
+	
+ANSWER:	
+	func length(_ list: MyList) -> Int {
+		switch list {
+		case .Cons(_, let tail):
+			return 1 + length(list: tail)
+		case .Nils:
+			return 0;
+		}
+	}

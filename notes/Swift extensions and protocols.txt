@@ -1,0 +1,36 @@
+1.) 
+	Use extension to add an add method to Int, which takes another Int and
+	returns the sum of the two Ints. An example call is below:
+	5.add(6) // returns 11 
+ANSWER:
+	extension Int {
+		func add(_ i: Int) -> {
+			return self + i
+		}
+	}
+	
+2.) 
+	Define a protocol named Equality, which defines an equals method. equals
+	takes something of the same type it is called on, and returns a Bool indicating whether
+	the two values equal each other or not. As a hint, the type Self refers to whatever type
+	it was called on. Example calls are below (assuming an extension is defined
+	elsewhere adding equals to Int):
+	5.equals(5) // returns true
+	5.equals(6) // returns false
+	5.equals("foo") // compile-time error; Int and String are not
+	// not the same type
+ANSWER:
+	protocol Equality {
+		func equals(_ : Self) -> Bool;
+	}
+	
+	
+3.) Use extension to say that Int satisfies the Equality protocol you defined
+above. This adds the equals method to Int. As a hint, == is used to test if two Ints
+are equal or not.	
+ANSWER:
+	extension Int: Equality {
+		func equals(_ b: Int) -> Bool {
+			return b == self
+		}
+	}

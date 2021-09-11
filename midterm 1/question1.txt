@@ -1,0 +1,76 @@
+Consider the following code snippet:
+
+public class Main {
+    public static void printWith(Concatter c) {
+        String result = c.concat("baz");
+        System.out.println(result);
+        result = c.concat("blah");
+        System.out.println(result);
+    }
+    
+    public static void main(String[] args) {
+        Concatter c1 = new LeftRight("foo");
+        Concatter c2 = new RightLeft("bar");
+
+        printWith(c1);
+        printWith(c2);
+    }
+}
+Main's output:
+
+foobaz
+fooblah
+bazbar
+blahbar
+Define any interfaces and/or classes necessary to make this output happen. 
+
+Multiple answers are possible. You may not modify any of the code in Main.
+
+/////////Implementation answer/////////////////////////
+public interface Concatter {
+public String concat(String c);
+}
+
+public class LeftRight implements Concatter {
+private String s;
+
+public LeftRight(String str) {
+this.s = str;
+}
+
+public String concat(String con) {
+return this.s + con;
+}
+}
+
+public class RightLeft implements Concatter {
+private String s;
+
+public RightLeft(String str) {
+this.s = str;
+}
+
+public String concat(String con) {
+return con + this.s;
+}
+}
+
+
+//////////Define answer/////////////////////////
+public interface Concatter() {
+private String str;
+public String concat(String c);
+}
+
+public class LeftRight implements Concatter {
+private String str;
+public LeftRight(String newStr) { .... }
+public String concat(String c) { ....}
+}
+
+
+public class RightLeft implements Concatter {
+private String str;
+public RightLeft(String newStr) { .... }
+public String concat(String c) { ....}
+}

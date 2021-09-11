@@ -1,0 +1,49 @@
+-----------PROJECT-----------
+
+For sum
+func sum(zero: A, add: (A,A) -> A) -> A { ... } //intended signature
+
+func sum(zero: Int, add: (Int, Int) -> Int) -> Int { ... } //other possible way but not intended 
+
+
+
+-----------EXAM-----------
+
+ - JS higher order functions
+ - Prototype based inheritance
+ - Draw a memory diagram
+ - Swift stuff 
+ 
+ 
+ 
+-----------EXTENSIONS-----------
+
+extension Int {
+	func addFive() -> Int {
+		return self + 5
+	}
+}
+
+print(5.addFive())
+print(3.addFive())
+
+What is happening? The addFive method is being added to Int, so now any Int can use addFive(). This can be done to things that are not Objects (such as the Int data type)
+The method interanlly uses "self" - basically the same as "this" in Java. 
+
+enum MyEnum {
+	case Foo
+	case Bar
+}
+
+extension MyEnum {
+	func doSomething() {
+		switch self {
+			case .Foo: print("foo")
+			case .Bar: print("bar")
+		}
+	}
+}
+
+MyEnum.Foo.doSomething()
+
+This can be done to any type that exists, including ones you write. It does not have to be one you write though, as seen above. 
